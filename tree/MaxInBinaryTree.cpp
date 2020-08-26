@@ -1,7 +1,5 @@
-
-										//Get size of binary tree i.e how many nodes are there in tree
-
 #include<iostream>
+#include<queue>
 using namespace std;
 struct node
 {
@@ -13,16 +11,12 @@ struct node
 		left=right=NULL;
 	}
 };
-int getSize(node *root)
+int getMax(node *root)
 {
-	if(root==NULL) 
-	{
-		return 0;
-    }
+	if(root==NULL)
+		return INT_MIN;
 	else
-	{
-		return 1+getSize(root->left)+getSize(root->right);
-	}
+		return max(root->key,max(getMax(root->left),getMax(root->right)));
 }
 int main()
 {
@@ -34,6 +28,6 @@ int main()
     root->right->right=new node(6);
     root->left->right->left=new node(9);
     root->left->right->right=new node(15);
-    cout<<"Get size of Binary Tree"<<endl;
-    cout<<getSize(root);
+    cout<<"Maximum in Binary Tree"<<endl;
+    cout<<getMax(root);
 }
